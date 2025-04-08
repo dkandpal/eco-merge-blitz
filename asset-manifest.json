@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/eco-merge-blitz/static/css/main.e6c13ad2.css",
-    "main.js": "/eco-merge-blitz/static/js/main.879da711.js",
+    "main.js": "/eco-merge-blitz/static/js/main.563b4eb8.js",
     "static/js/453.b629eb37.chunk.js": "/eco-merge-blitz/static/js/453.b629eb37.chunk.js",
     "index.html": "/eco-merge-blitz/index.html",
     "main.e6c13ad2.css.map": "/eco-merge-blitz/static/css/main.e6c13ad2.css.map",
-    "main.879da711.js.map": "/eco-merge-blitz/static/js/main.879da711.js.map",
+    "main.563b4eb8.js.map": "/eco-merge-blitz/static/js/main.563b4eb8.js.map",
     "453.b629eb37.chunk.js.map": "/eco-merge-blitz/static/js/453.b629eb37.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.879da711.js"
+    "static/js/main.563b4eb8.js"
   ]
 }
