@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ScoreEntry, getLeaderboard } from '../types/leaderboard';
+import { getLeaderboard } from '../types/leaderboard';
 
 const LeaderboardContainer = styled.div`
   background-color: #bbada0;

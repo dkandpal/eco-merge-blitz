@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import { useSwipeable } from 'react-swipeable';
 import type { Tile as TileType, TileValue } from '../types/game';
 import { GameState, TILE_EMOJIS, TILE_NAMES } from '../types/game';
 import { saveToLeaderboard } from '../types/leaderboard';
@@ -237,17 +238,8 @@ const Game: React.FC = () => {
     return { newGrid, score, moved };
   }, [gameState.score, addRandomTile]);
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+  const handleMove = useCallback((direction: 'up' | 'down' | 'left' | 'right') => {
     if (!gameState.isPlaying) return;
-
-    let direction: 'up' | 'down' | 'left' | 'right' | null = null;
-    switch (e.key) {
-      case 'ArrowUp': direction = 'up'; break;
-      case 'ArrowDown': direction = 'down'; break;
-      case 'ArrowLeft': direction = 'left'; break;
-      case 'ArrowRight': direction = 'right'; break;
-      default: return;
-    }
 
     const { newGrid, score, moved } = moveTiles(gameState.grid, direction);
     if (moved) {
@@ -258,6 +250,26 @@ const Game: React.FC = () => {
       }));
     }
   }, [gameState.grid, gameState.isPlaying, moveTiles]);
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    let direction: 'up' | 'down' | 'left' | 'right' | null = null;
+    switch (e.key) {
+      case 'ArrowUp': direction = 'up'; break;
+      case 'ArrowDown': direction = 'down'; break;
+      case 'ArrowLeft': direction = 'left'; break;
+      case 'ArrowRight': direction = 'right'; break;
+      default: return;
+    }
+    handleMove(direction);
+  }, [handleMove]);
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => handleMove('left'),
+    onSwipedRight: () => handleMove('right'),
+    onSwipedUp: () => handleMove('up'),
+    onSwipedDown: () => handleMove('down'),
+    trackMouse: true
+  });
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -325,7 +337,7 @@ const Game: React.FC = () => {
   }
 
   return (
-    <GameContainer>
+    <GameContainer {...swipeHandlers}>
       <ScoreContainer>
         <Score>Score: {gameState.score}</Score>
         <Timer>Time: {gameState.timeLeft}s</Timer>
